@@ -1,0 +1,4 @@
+huggingface-hub==0.23.4
+tensorflow-addons==0.21.0
+xmltodict==0.13.0
+pandas==2.0.3
