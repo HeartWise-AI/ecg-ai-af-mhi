@@ -20,20 +20,46 @@ pip install -r requirements.txt
 ```
 
 ## How to Run the Code
-To run the inference with the ECG AI model, follow these steps:
-
-### Clone this repository.
-Place your XML files containing the ECG data in a directory (e.g., ./xml-data/).
-Use the following command to run the script. Make sure to replace /path/to/xml_directory with your directory path containing the XML files:
 
 ### Huggingface authentification 
-Executing the code will pull the model weights from huggingface. You need to be authenticated. Login to your huggingface account and obtain a read-access token. 
+You need to be authenticated to huggingface[https://huggingface.co/] to access the model weights. This is required to run the inference. 
+Login to your huggingface account and obtain a read-access token in `Settings > Access Token > + Create New Token`. 
+
 Run `export HF_TOKEN=<your-access-token-here>`
 
+### Clone this repository.
+Place your XML files containing the ECG data in a directory (e.g., ./xml-data/). 
+
+### Using Docker
+
+The recommended way to run this code is to use docker. First, create a .env file containing your huggingface access token. This is required to obtain the model weights. 
+```
+cp .env.example .env
+```
+Change `<your-access-token>` with your hf access token 
+
+#### Build docker image 
+```
+docker build -t ecg-ai-af-mhi .
+```
+
+#### Run docker
+```
+docker run \
+  --gpus all \
+  --env-file .env \
+  -v /home/otastet/gjabbour/ecg-ai-af-mhi/xml-data/:/xml-data/ \
+  -v /home/otastet/gjabbour/ecg-ai-af-mhi/weights/:/weights/ \
+  -v /home/otastet/gjabbour/ecg-ai-af-mhi/results/:/results/ \
+  ecg-ai-af-mhi
+```
+
+To run the inference with the ECG AI model, follow these steps:
+
+
+
+
 ### Run the code 
-
-
-The inference results will be printed to the console.
 
 ## Downloading the Model
 The code is configured to download a pre-trained model from the Hugging Face Hub using the snapshot_download function. Ensure you have the proper authentication token to download the model.
