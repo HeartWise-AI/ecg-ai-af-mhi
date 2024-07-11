@@ -1,1 +1,7 @@
+weights/*
+!weights/.gitignore
+results/*
+!results/.gitignore
+xml-data
+!xml-data/.gitignore
 .env
