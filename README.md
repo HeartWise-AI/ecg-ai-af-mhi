@@ -24,12 +24,15 @@ The code is structured into several functions:
 `decode_ekg_muse_to_array`: Takes base64 encoded waveforms and transforms them into a numeric array.
 
 `extract_wf_as_npy`: Extracts waveform data as a NumPy array from a directory containing XML files.
-*make_inference: Loads the data, preprocesses it with a standard scaler, and runs the model inference.
-get_arguments: Parses command-line arguments.
-How to Run the Code
+
+`make_inference`: Loads the data, preprocesses it with a standard scaler, and runs the model inference.
+
+`get_arguments`: Parses command-line arguments.
+
+## How to Run the Code
 To run the inference with the ECG AI model, follow these steps:
 
-## Clone this repository.
+### Clone this repository.
 Place your XML files containing the ECG data in a directory (e.g., ./xml-data/).
 Use the following command to run the script. Make sure to replace /path/to/xml_directory with your directory path containing the XML files:
 
