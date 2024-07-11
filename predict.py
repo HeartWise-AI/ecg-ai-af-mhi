@@ -2,6 +2,8 @@ import xmltodict
 import base64
 import struct
 import json
+import os
+
 import numpy as np 
 import pandas as pd 
 from glob import glob
@@ -59,11 +61,16 @@ def get_arguments():
 if __name__ == '__main__':
     
     args = get_arguments()
-    snapshot_download(
-        repo_id="heartwise/ecgAI_AF_MHI", 
-        local_dir="./weights/", 
-        token='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')
+    try:
+        snapshot_download(
+            repo_id="heartwise/ecgAI_AF_MHI", 
+            local_dir="./weights/"
+        )
+    except Exception as e:
+        print("Error: Could not download the model weights. \nPlease make sure you are authenticated and have access to the resource.")
+        exit(1)  # Abort the script with a non-zero exit code to indicate an error
     
+        
     with open(args.config) as f:
         config = json.load(f)
         
