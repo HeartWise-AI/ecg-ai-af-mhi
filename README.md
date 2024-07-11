@@ -59,7 +59,7 @@ A config file is used to indicate the different folders. Please specify the:
 
 
 ```
-python predict.py --params params.json
+python predict.py --config params.json
 ```
 
 
