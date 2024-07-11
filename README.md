@@ -51,11 +51,11 @@ pip install -r requirements.txt
 
 A config file is used to indicate the different folders. Please specify the: 
 
-`model_path` : where the model weights will be downloaded 
+* `model_path` : where the model weights will be downloaded 
 
-`xml_dir` : where the xml files are stored 
+* `xml_dir` : where the xml files are stored 
 
-`output_dir` : where the results.csv will be saved 
+* `output_dir` : where the results.csv will be saved 
 
 
 ```
