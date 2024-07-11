@@ -1,3 +1,4 @@
-xml-data/
-weights/
+xml-data/*
+weights/*
 .env
+results/*

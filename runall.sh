@@ -1,1 +1,1 @@
-python xml2npy.py --xml_dir /xml-data/
+python predict.py --config params.json

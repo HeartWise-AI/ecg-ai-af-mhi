@@ -17,7 +17,7 @@ def make_inference(config):
     
     # Importing the model
     model = load_model(
-            config['model_path'], 
+            f"{config['model_path']}/best_model.h5", 
             custom_objects={'Addons>F1Score': tfa.metrics.F1Score}
         )
 
@@ -25,8 +25,8 @@ def make_inference(config):
     xml_files, waveforms = extract_wf_as_npy(config['xml_dir'])
     
     # Standard scaler
-    mean = config['mean']
-    std = config['std']
+    mean = config['model_config']['mean']
+    std = config['model_config']['std']
     waveforms_std = (waveforms - mean) / std
     waveforms_std = waveforms_std.astype(np.float16)
 
@@ -60,21 +60,26 @@ def get_arguments():
 
 if __name__ == '__main__':
     
+    
     args = get_arguments()
+    with open(args.config) as f:
+        params = json.load(f)
+        
     try:
         snapshot_download(
             repo_id="heartwise/ecgAI_AF_MHI", 
-            local_dir="./weights/"
+            local_dir=params['model_path']
         )
     except Exception as e:
-        print("Error: Could not download the model weights. \nPlease make sure you are authenticated and have access to the resource.")
+        print("Error: Could not download the model weights. \nPlease make sure you are authenticated and have access to the resource. \nLogin the huggingface and obtain an access token")
         exit(1)  # Abort the script with a non-zero exit code to indicate an error
     
-        
-    with open(args.config) as f:
+    with open(f"{params['model_path']}/config.json") as f:
         config = json.load(f)
-        
-    results = make_inference(config)
-    print(results)
+    
+    params['model_config'] = config
+    
+    results = make_inference(params)
+    results.to_csv(f"{params['output_dir']}/results.csv")
     
     

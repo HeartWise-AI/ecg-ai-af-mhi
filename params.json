@@ -1,6 +1,5 @@
 {
-    "mean": -0.75227547,
-    "std": 41.20366,
-    "model_path": "./weights/best_model.h5",
-    "xml_dir": "./xml-data/"
+    "model_path": "./weights",
+    "xml_dir": "./xml-data/",
+    "output_dir": "./results"
 }
