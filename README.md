@@ -18,8 +18,6 @@ You can install these packages using `pip`:
 pip install xmltodict numpy tensorflow tensorflow_addons huggingface-hub
 ```
 
-Certainly! Below is a sample README.md file created to explain your code and how to run it. Remember to fill in the sections marked with [...] according to your project's details.
-
 markdown
 Copy code
 # ECG AI Model Inference
