@@ -34,14 +34,13 @@ docker run \
   ecg-ai-af-mhi
 ```
 
-The results can be found in ./results/results.csv
-
 
 ## Run the code 
 
-If you prefer running the code directly, follow these steps:
+It is strongly recommended to use the docker steps but you can also try to run the code directly in the terminal. 
+However, the versions of cuda and tensorflow need to match and this option currently doesn't work on macos. 
 
-You can install the packages in a virtual environment using `pip`:
+Install the packages in a virtual environment using `pip`:
 
 ```shell
 conda create -n ai-env python=3.8
@@ -49,26 +48,12 @@ conda activate ai-env
 pip install -r requirements.txt
 ```
 
-A config file is used to indicate the different folders. Please specify the: 
-
-* `model_path` : where the model weights will be downloaded 
-
-* `xml_dir` : where the xml files are stored 
-
-* `output_dir` : where the results.csv will be saved
-
-It is suggested to create those directories inside the repo: 
-```
-mkdir xml-data
-mkdir weights
-mkdir results
-```
-
-
 ```
 python predict.py --config params.json
 ```
 
+### Results 
+The results can be found in `results/results.csv`
 
 ## License
 [...]
