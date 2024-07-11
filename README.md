@@ -22,7 +22,7 @@ pip install -r requirements.txt
 ## How to Run the Code
 
 ### Huggingface authentification 
-You need to be authenticated to huggingface[https://huggingface.co/] to access the model weights. This is required to run the inference. 
+You need to be authenticated to [huggingface](https://huggingface.co/) to access the model weights. This is required to run the inference. 
 Login to your huggingface account and obtain a read-access token in `Settings > Access Token > + Create New Token`. 
 
 Run `export HF_TOKEN=<your-access-token-here>`
