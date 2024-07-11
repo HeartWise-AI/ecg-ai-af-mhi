@@ -55,7 +55,14 @@ A config file is used to indicate the different folders. Please specify the:
 
 * `xml_dir` : where the xml files are stored 
 
-* `output_dir` : where the results.csv will be saved 
+* `output_dir` : where the results.csv will be saved
+
+It is suggested to create those directories inside the repo: 
+```
+mkdir xml-data
+mkdir weights
+mkdir results
+```
 
 
 ```
