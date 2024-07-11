@@ -1,6 +1,6 @@
 # ECG AI Model Inference
 
-This repository contains Python code for loading ECG (electrocardiogram) data from XML files, preprocessing it, and running inference using a deep learning model. The main functionality is to decode encoded ECG waveforms from XML, transform them to NumPy arrays, and apply a trained model to predict outcomes.
+This repository contains Python code for loading ECG (electrocardiogram) data from XML files, preprocessing it, and running inference using a deep learning model. The main functionality is to decode encoded ECG waveforms from XML, transform them to NumPy arrays, and apply a trained model to predict outcomes. The results are then saved as a CSV file. 
 
 ## Prerequisites
 
@@ -12,22 +12,12 @@ Before running this code, ensure you have the following packages installed:
 - `tensorflow_addons`: For additional TensorFlow metrics.
 - `huggingface_hub`: For downloading models from Hugging Face Hub.
 
-You can install these packages using `pip`:
+You can install these packages in a virtual environment using `pip`:
 
 ```shell
-pip install xmltodict numpy tensorflow tensorflow_addons huggingface-hub
+conda create -n ai-env python=3.8 
+pip install -r requirements.txt
 ```
-
-## Structure of the Code
-The code is structured into several functions:
-
-`decode_ekg_muse_to_array`: Takes base64 encoded waveforms and transforms them into a numeric array.
-
-`extract_wf_as_npy`: Extracts waveform data as a NumPy array from a directory containing XML files.
-
-`make_inference`: Loads the data, preprocesses it with a standard scaler, and runs the model inference.
-
-`get_arguments`: Parses command-line arguments.
 
 ## How to Run the Code
 To run the inference with the ECG AI model, follow these steps:
@@ -36,9 +26,12 @@ To run the inference with the ECG AI model, follow these steps:
 Place your XML files containing the ECG data in a directory (e.g., ./xml-data/).
 Use the following command to run the script. Make sure to replace /path/to/xml_directory with your directory path containing the XML files:
 
-```
-python your_script_name.py --xml_dir /path/to/xml_directory
-```
+### Huggingface authentification 
+Executing the code will pull the model weights from huggingface. You need to be authenticated. Login to your huggingface account and obtain a read-access token. 
+Run `export HF_TOKEN=<your-access-token-here>`
+
+### Run the code 
+
 
 The inference results will be printed to the console.
 
