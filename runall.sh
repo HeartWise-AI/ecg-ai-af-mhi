@@ -1,0 +1,1 @@
+python xml2npy.py --xml_dir /xml-data/
