@@ -21,7 +21,8 @@ pip install xmltodict numpy tensorflow tensorflow_addons huggingface-hub
 ## Structure of the Code
 The code is structured into several functions:
 
-*decode_ekg_muse_to_array*: Takes base64 encoded waveforms and transforms them into a numeric array.
+`decode_ekg_muse_to_array`: Takes base64 encoded waveforms and transforms them into a numeric array.
+
 `extract_wf_as_npy`: Extracts waveform data as a NumPy array from a directory containing XML files.
 *make_inference: Loads the data, preprocesses it with a standard scaler, and runs the model inference.
 get_arguments: Parses command-line arguments.
