@@ -28,9 +28,9 @@ docker build -t ecg-ai-af-mhi .
 docker run \
   --gpus all \
   --env-file .env \
-  -v /home/otastet/gjabbour/ecg-ai-af-mhi/xml-data/:/xml-data/ \
-  -v /home/otastet/gjabbour/ecg-ai-af-mhi/weights/:/weights/ \
-  -v /home/otastet/gjabbour/ecg-ai-af-mhi/results/:/results/ \
+  -v ./xml-data/:/xml-data/ \
+  -v ./weights/:/weights/ \
+  -v ./results/:/results/ \
   ecg-ai-af-mhi
 ```
 
