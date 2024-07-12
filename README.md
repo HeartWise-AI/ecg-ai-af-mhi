@@ -64,7 +64,7 @@ Run the code using the parameters json file. This file points to the directories
 python predict.py --config params.json
 ```
 
-### Results 
+## Results 
 The results can be found in `results/results.csv`
 
 ## License
