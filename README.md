@@ -4,9 +4,13 @@ This repository contains Python code for loading ECG (electrocardiogram) data fr
 
 ## Setup
 
+### Huggingface gated access
+The model weights are public but their access is gated. You must first login to huggingface and request access to the [weights](https://huggingface.co/heartwise/ecgAI_AF_MHI). 
+You will be granted access immediately. 
+
 ### Huggingface authentification 
-You need to be authenticated to [huggingface](https://huggingface.co/) to access the model weights. This is required to run the inference. 
-Login to your huggingface account and obtain a read-access token in `Settings > Access Token > + Create New Token`. 
+Because the files are gated, you need to be authenticated to [huggingface](https://huggingface.co/) to access the model weights. This is required to run the inference. 
+From your huggingface account, obtain a read-access token in `Settings > Access Token > + Create New Token`. 
 
 Use a .env file to load your access token
 ```
@@ -16,7 +20,8 @@ Change `<your-access-token>` with your hf access token
 
 ## Using Docker
 
-The recommended way to run this code is to use docker. 
+The recommended way to run this code is to use docker. The model makes predictions from MUSE XML ECG files. 
+You need to first prepare your input files by putting them in the `./xml-data` directory
 
 ### Build docker image 
 ```
@@ -33,7 +38,6 @@ docker run \
   -v ./results/:/results/ \
   ecg-ai-af-mhi
 ```
-
 
 ## Run the code 
 
