@@ -52,6 +52,12 @@ conda activate ai-env
 pip install -r requirements.txt
 ```
 
+Make sure the .env file is sourced to have access to the HF_TOKEN environment variable 
+```
+source .env
+```
+
+Run the code using the parameters json file. This file points to the directories used by the code (ie, xml-data, weights, results)
 ```
 python predict.py --config params.json
 ```
