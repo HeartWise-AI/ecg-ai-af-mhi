@@ -84,6 +84,6 @@ if __name__ == '__main__':
     params['model_config'] = config
     
     results = make_inference(params)
-    results.to_csv(f"{params['output_dir']}/results.csv")
+    results.to_csv(f"{params['output_dir']}/results.csv",index=False)
     
     

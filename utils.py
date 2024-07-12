@@ -42,8 +42,8 @@ def decode_ekg_muse_to_array(raw_wave, downsample=1):
     return np.array(byte_array)[::dwnsmpl]
 
 def extract_wf_as_npy(xml_folder):
+    
     lead_data = dict.fromkeys(lead_order)
-
     all_ekg_arrays = []
     xml_files = [] 
     for xml_file in glob(f"{xml_folder}/*.xml"):
