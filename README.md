@@ -77,12 +77,10 @@ If you use this code for academic research, please cite it as follows:
 @software{your_name_year,
   author = {[Your Name]},
   title = {{ECG AI Model Inference}},
-  url = {https://github.com/[Your GitHub Username]/[Your Repository Name]},
-  year = {[Year]}
+  url = {https://github.com/HeartWise-AI/ecg-ai-af-mhi},
+  year = {2024}
 }
 ```
-
-Remember to include the LICENSE file and replace [Your Name], [Year], [Your GitHub Username], and [Your Repository Name] with your information.
 
 
 ## Contact
