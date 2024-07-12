@@ -14,7 +14,7 @@ You will be granted access immediately.
 
 ### Huggingface authentification 
 Because the files are gated, you need to be authenticated to [huggingface](https://huggingface.co/) to access the model weights. This is required to run the inference. 
-From your huggingface account, obtain a read-access token in `Settings > Access Token > + Create New Token`. 
+From your huggingface account, obtain a [read-access token](https://huggingface.co/docs/hub/en/security-tokens) in `Settings > Access Token > + Create New Token`. 
 
 Use a .env file to load your access token
 ```
