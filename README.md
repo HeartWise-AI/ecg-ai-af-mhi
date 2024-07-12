@@ -2,6 +2,8 @@
 
 This repository contains Python code for loading ECG (electrocardiogram) data from XML files, preprocessing it, and running inference using a deep learning model. The main functionality is to decode encoded ECG waveforms from XML, transform them to NumPy arrays, and apply a trained model to predict outcomes. The results are then saved as a CSV file. 
 
+Model Outcome: Incident atrial fibrillation or atrial flutter at 5 years at MHI (0/1)
+
 ## Setup
 
 ### Huggingface gated access
