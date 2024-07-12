@@ -12,7 +12,11 @@ from tensorflow.keras.models import load_model
 import tensorflow_addons as tfa
 from huggingface_hub import snapshot_download
 from utils import extract_wf_as_npy
-            
+from dotenv import load_dotenv
+
+load_dotenv()
+api_key = os.getenv('HF_TOKEN')
+
 def make_inference(config):
     
     # Importing the model
@@ -71,7 +75,7 @@ if __name__ == '__main__':
             local_dir=params['model_path']
         )
     except Exception as e:
-        print("Error: Could not download the model weights. \nPlease make sure you are authenticated and have access to the resource. \nLogin the huggingface and obtain an access token")
+        print(e)
         exit(1)  # Abort the script with a non-zero exit code to indicate an error
     
     with open(f"{params['model_path']}/config.json") as f:
