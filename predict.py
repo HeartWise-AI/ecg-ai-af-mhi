@@ -68,16 +68,18 @@ if __name__ == '__main__':
     args = get_arguments()
     with open(args.config) as f:
         params = json.load(f)
-        
-    try:
-        snapshot_download(
-            repo_id="heartwise/ecgAI_AF_MHI", 
-            local_dir=params['model_path']
-        )
-    except Exception as e:
-        print(e)
-        exit(1)  # Abort the script with a non-zero exit code to indicate an error
     
+    
+    ## Download the weights only if not already present in the weights folder
+    if not os.path.exists(os.path.join(params['model_path'], 'best_model.h5')):
+        try:
+            snapshot_download(
+                repo_id="heartwise/ecgAI_AF_MHI", 
+                local_dir=params['model_path']
+            )
+        except Exception as e:
+            print(e)
+            exit(1)  # Abort the script with a non-zero exit code to indicate an error
     with open(f"{params['model_path']}/config.json") as f:
         config = json.load(f)
     
