@@ -5,3 +5,4 @@ results/*
 xml-data
 !xml-data/.gitignore
 .env
+__pycache__
