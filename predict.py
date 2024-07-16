@@ -29,9 +29,7 @@ def make_inference(config):
     xml_files, waveforms = extract_wf_as_npy(config['xml_dir'])
     
     # Standard scaler
-    mean = config['model_config']['mean']
-    std = config['model_config']['std']
-    waveforms_std = (waveforms - mean) / std
+    waveforms_std = (waveforms - config['model_config']['mean']) / config['model_config']['std']
     waveforms_std = waveforms_std.astype(np.float16)
 
     # Model predictions
@@ -58,7 +56,7 @@ def get_arguments():
         "--config",
         metavar="config",
         type=str,
-        help="Enter path to xml",
+        help="Enter path to config file",
     )
     return parser.parse_args()
 
