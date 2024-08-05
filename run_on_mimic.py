@@ -50,8 +50,8 @@ def run_on_MIMIC(params, model):
     print("Available GPUs:", tf.config.list_physical_devices('GPU'))
 
     # Set normalization parameters
-    mean = params['models_config']['MIMIC']['mean']
-    std = params['models_config']['MIMIC']['std']
+    mean = params['model_config']['MIMIC']['mean']
+    std = params['model_config']['MIMIC']['std']
     
     # Load and preprocess the DataFrame
     df = pd.read_csv("pred_waveform_path.csv.gz")
