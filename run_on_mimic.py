@@ -6,8 +6,6 @@ import tensorflow as tf
 import tensorflow_addons as tfa
 from tqdm import tqdm
 from dotenv import load_dotenv
-from huggingface_hub import snapshot_download
-from tensorflow.keras.models import load_model
 
 load_dotenv()
 API_KEY = os.getenv('HF_TOKEN')
@@ -47,22 +45,13 @@ class ECGDataset:
         dataset = dataset.prefetch(tf.data.AUTOTUNE)
         return dataset
 
-if __name__ == "__main__":
+def run_on_MIMIC(params, model):
     # Check available GPU
     print("Available GPUs:", tf.config.list_physical_devices('GPU'))
 
-    # Download model weights
-    snapshot_download(repo_id="heartwise/ecgAI_AF_MHI", local_dir="weights")
-    
-    # Load the model
-    model = load_model(
-        "weights/best_model.h5", 
-        custom_objects={'Addons>F1Score': tfa.metrics.F1Score}
-    )
-    
     # Set normalization parameters
-    mean = 7.1039143
-    std = 196.01025
+    mean = params['models_config']['MIMIC']['mean']
+    std = params['models_config']['MIMIC']['std']
     
     # Load and preprocess the DataFrame
     df = pd.read_csv("pred_waveform_path.csv.gz")
@@ -91,8 +80,4 @@ if __name__ == "__main__":
         'pred': predictions
     })
     
-    # Save results to the specified output directory
-    output_file = os.path.join(OUTPUT_DIR, "predictions.csv")
-    results_df.to_csv(output_file, index=False)
-
-print(f"Processing complete. Results saved to {output_file}")
+    return results_df

@@ -1,1 +1,1 @@
-python predict.py --config params.json
+python predict.py --config params.json --MIMIC
