@@ -63,7 +63,7 @@ if __name__ == '__main__':
 
     # Importing the model
     model = load_model(
-            f"{config['model_path']}/best_model.h5", 
+            f"{params['model_path']}/best_model.h5", 
             custom_objects={'Addons>F1Score': tfa.metrics.F1Score}
         )
     
