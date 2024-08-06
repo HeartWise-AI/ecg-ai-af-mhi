@@ -2,7 +2,8 @@ weights/*
 !weights/.gitignore
 results/*
 !results/.gitignore
-data/
+data/xml-data
+data/npy-data
 !data/xml-data/.gitignore
 !data/npy-data/.gitignore
 .env
