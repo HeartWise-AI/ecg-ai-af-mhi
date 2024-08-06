@@ -2,10 +2,9 @@ weights/*
 !weights/.gitignore
 results/*
 !results/.gitignore
-xml-data
-!xml-data/.gitignore
-npy-data
-!npy-data/.gitignore
+!data/xml-data/.gitignore
+data
+!data/npy-data/.gitignore
 .env
 utils_mimic_dataset/data-tables
 __pycache__
