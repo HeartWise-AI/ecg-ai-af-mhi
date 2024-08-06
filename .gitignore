@@ -4,5 +4,9 @@ results/*
 !results/.gitignore
 xml-data
 !xml-data/.gitignore
+npy-data
+!npy-data/.gitignore
 .env
+utils_mimic_dataset/data-tables
 __pycache__
+data/
