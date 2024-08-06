@@ -7,5 +7,5 @@ data/npy-data/*
 !data/xml-data/.gitignore
 !data/npy-data/.gitignore
 .env
-utils_mimic_dataset/data-tables
+utils_mimic_dataset/extract-mimic-data/data-tables
 __pycache__
