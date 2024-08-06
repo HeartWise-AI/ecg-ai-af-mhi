@@ -1,7 +1,0 @@
-{
-    "records": "/path/to/record_list.csv",
-    "metadata": "/path/to/machine_measurements.csv",
-    "patients": "/path/to/patients.csv.gz",
-    "wf_path": "/path/to/wf",
-    "output_dir": "/path/to/output_dir"
-}
