@@ -212,8 +212,8 @@ def main():
             final_ecg_rows = pd.concat([final_ecg_rows, ecg_rows], ignore_index=True)
             patient_rows_df = pd.concat([patient_rows_df, pd.DataFrame([patient_row])], ignore_index=True)
     
-    final_ecg_rows.to_csv('final_ecg_rows.csv', index=False)
-    patient_rows_df.to_csv('patient_rows.csv', index=False)
+    final_ecg_rows.to_csv('data-tables/final_ecg_rows.csv', index=False)
+    patient_rows_df.to_csv('data-tables/patient_rows.csv', index=False)
 
 if __name__ == '__main__':
     main()
