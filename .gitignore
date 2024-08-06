@@ -2,8 +2,8 @@ weights/*
 !weights/.gitignore
 results/*
 !results/.gitignore
+data/
 !data/xml-data/.gitignore
-data
 !data/npy-data/.gitignore
 .env
 utils_mimic_dataset/data-tables
