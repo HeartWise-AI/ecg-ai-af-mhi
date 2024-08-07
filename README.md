@@ -6,7 +6,23 @@ Model Outcome: Incident atrial fibrillation or atrial flutter at 5 years at MHI 
 
 *Atrial fibrillation (AF) and atrial flutter (AFL) are abnormal heart rhythms originating in the upper chambers of the heart (atria). They cause the atria to beat irregularly and often faster than normal, disrupting the heart's coordinated contraction. Detecting AF and AFL is important because they can lead to serious complications such as stroke, heart failure, and reduced quality of life. Early detection allows for timely treatment, which may include medications, procedures, or other interventions to restore normal heart rhythm and prevent complications. ECG-based AI models, like the one in this repository, can assist in the automated detection of these arrhythmias, enabling prompt diagnosis and management.*
 
-## Setup
+## Preparing MIMIC-Ext dataset
+
+*The MIMIC-IV-ECG dataset, a subset of the MIMIC-IV Clinical Database, contains approximately 800,000 diagnostic ECGs from nearly 160,000 unique subjects, along with associated machine measurements and cardiologist reports. Validating an AI model on this external dataset offers several benefits, including assessing generalizability, evaluating robustness to different patient populations and clinical settings, reducing biases, enabling benchmarking, and exploring the model's potential for clinical decision support. By validating the model on MIMIC-IV-ECG, researchers can ensure its reliability and effectiveness in real-world applications, ultimately contributing to the development of more advanced AI tools in healthcare.*
+
+### Extracting Waveform Signal
+
+``` python utils_mimic_dataset/extract-mimic-data/extract_mimic.py --records path/to/records.csv --metadata path/to/machine_measurements.csv --patients path/to/patients.csv.gz --wf_path path/to/wf/ --output_dir path/to/output_dir --output_file path/to/output_file ```
+
+### Creating Ground-Truth Table for Atrial Fibrillation/Atrial Flutter
+
+``` python utils_mimic_dataset/extract-mimic-data/create_tables.py ```
+
+### Find Scaling Factors for MIMIC dataset 
+
+``` python utils_mimic_dataset/extract-mimic-data/scale_mimic_waveforms.py --data_dir path/to/root/mimic-npy ```
+
+## Inference Setup
 
 ### Huggingface gated access
 The model weights are public but their access is gated. You must first login to huggingface and request access to the [weights](https://huggingface.co/heartwise/ecgAI_AF_MHI). 
@@ -22,7 +38,7 @@ cp .env.example .env
 ```
 Change `<your-access-token>` with your hf access token
 
-## Using Docker
+## Inference Using Docker
 
 The recommended way to run this code is to use docker. The model makes predictions from MUSE XML ECG files. 
 You need to first prepare your input files by putting them in the `./xml-data` directory
@@ -66,8 +82,11 @@ Run the code using the parameters json file. This file points to the directories
 python predict.py --config params.json
 ```
 
-## Results 
+### Results 
+
 The results can be found in `results/results.csv`
+Validation metrics can be obtained by running: ``` python utils_mimic_dataset/external_validation_statistics.py --ecg_csv path/to/final_ecgs_mimic.csv --patient_csv path/to/patient_mimic.csv --pred_csv path/to/predictions.csv ```
+ 
 
 ## License
 [...]
