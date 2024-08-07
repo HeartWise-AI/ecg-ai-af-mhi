@@ -79,7 +79,7 @@ source .env
 
 Run the code using the parameters json file. This file points to the directories used by the code (ie, xml-data, weights, results)
 ```
-python predict.py --config params.json
+python predict.py --config params.json --MHI|--MIMIC
 ```
 
 ### Results 
