@@ -4,7 +4,7 @@ This repository contains Python code for loading ECG (electrocardiogram) data fr
 
 Model Outcome: Incident atrial fibrillation or atrial flutter at 5 years at MHI (0/1)
 
-*Atrial fibrillation (AF) and atrial flutter (AFL) are abnormal heart rhythms originating in the upper chambers of the heart (atria). They cause the atria to beat irregularly and often faster than normal, disrupting the heart's coordinated contraction. Detecting AF and AFL is important because they can lead to serious complications such as stroke, heart failure, and reduced quality of life. Early detection allows for timely treatment, which may include medications, procedures, or other interventions to restore normal heart rhythm and prevent complications. ECG-based AI models, like the one in this repository, can assist in the automated detection of these arrhythmias, enabling prompt diagnosis and management.*
+*Atrial fibrillation (AF) and atrial flutter (AFL) are abnormal heart rhythms originating in the upper chambers of the heart (atria). They cause the atria to beat irregularly and often faster than normal, disrupting the heart's coordinated contraction. Detecting AF and AFL is important because they can lead to serious complications such as stroke, heart failure, and reduced quality of life. Early detection allows for timely treatment, which may include medications, procedures, or other interventions to restore normal heart rhythm and prevent complications. ECG-based AI models, like the one in this repository, can assist in the prediction of these arrhythmias, enabling prompt diagnosis and management.*
 
 ## Preparing MIMIC-Ext dataset
 
