@@ -95,11 +95,17 @@ Validation metrics can be obtained by running: ``` python utils_mimic_dataset/ex
 If you use this code for academic research, please cite it as follows:
 
 ```
-@software{your_name_year,
-  author = {[Your Name]},
-  title = {{ECG AI Model Inference}},
-  url = {https://github.com/HeartWise-AI/ecg-ai-af-mhi},
-  year = {2024}
+@software{jabbour2024_ecg_ai,
+  author    = {Gilbert Jabbour and Alexis Nolin-Lapalme and Olivier Tastet and Denis Corbin and Paloma Jordà and Achille Sowa and Jacques Delfrate and David Busseuil and Julie G. Hussin and Marie-Pierre Dubé and Jean-Claude Tardif and Léna Rivard and Laurent Macle and Julia Cadrin-Tourigny and Paul Khairy and Robert Avram and Rafik Tadros},
+  title     = {Prediction of incident atrial fibrillation using deep learning, clinical models, and polygenic scores},
+  year      = {2024},
+  journal   = {European Heart Journal},
+  volume    = {},
+  number    = {},
+  pages     = {},
+  doi       = {10.1093/eurheartj/ehae595},
+  url       = {https://doi.org/10.1093/eurheartj/ehae595},
+  note      = {Deep learning applied to electrocardiograms (ECG-AI) for atrial fibrillation prediction}
 }
 ```
 
