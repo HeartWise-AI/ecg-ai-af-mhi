@@ -1,9 +1,10 @@
 {
-    "model_path": "./weights",
+    "model_path": "/weights",
     "data_dir": {
         "XML": "./data/xml-data",
         "NPY": "./data/npy-data"
     },
-    "output_dir": "./results",
-    "batch_size": 4
+    "output_dir": "/results",
+    "batch_size": 4,
+    "csv_file": ""
 }

@@ -76,6 +76,7 @@ class ECGDatasetMIMIC(ECGDataset):
         """
         try:
             ecg_array = np.load(file_path.numpy().decode())
+            
             if not np.isfinite(ecg_array).all():
                 # Return zero array if not numerical
                 return np.zeros((2500, 12), dtype=np.float32), file_path

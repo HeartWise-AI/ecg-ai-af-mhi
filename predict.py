@@ -40,6 +40,11 @@ def get_arguments():
         action="store_true",
         help="Run on MHI dataset",
     )
+    parser.add_argument(
+        "--csv_data",
+        action="store_true",
+        help="Pass the ECGs through a txt file of paths"
+    )
     return parser.parse_args()
 
 
@@ -70,9 +75,16 @@ if __name__ == "__main__":
     params["model_config"] = config
 
     results = None
+    
+    if args.csv_data:
+        waveform_files_df = pd.read_csv(params['csv_file'],header=None)
+        waveform_files = [p for p in waveform_files_df[0]]
+    
     if args.MIMIC:
+        
         # Load and preprocess the DataFrame for MIMIC dataset
-        waveform_files = glob(f"{params['data_dir']['NPY']}/**/*.npy", recursive=True)
+        if not args.csv_data:
+            waveform_files = glob(f"{params['data_dir']['NPY']}/**/*.npy", recursive=True)
         # Create the MIMIC dataset
         ecg_dataset = ECGDatasetMIMIC(
             waveform_files,
@@ -84,7 +96,8 @@ if __name__ == "__main__":
 
     elif args.MHI:
         # Load and preprocess the DataFrame for MHI dataset
-        waveform_files = glob(f"{params['data_dir']['XML']}/**/*.xml", recursive=True)
+        if not args.csv_data:
+            waveform_files = glob(f"{params['data_dir']['XML']}/**/*.xml", recursive=True)
         # Create the MHI dataset
         ecg_dataset = ECGDatasetMHI(
             waveform_files,
