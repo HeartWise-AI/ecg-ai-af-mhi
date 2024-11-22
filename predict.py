@@ -15,6 +15,7 @@ load_dotenv()
 api_key = os.getenv("HF_TOKEN")
 
 
+
 def get_arguments():
     """
     Generate the arguments using CLI.
@@ -45,58 +46,56 @@ def get_arguments():
 if __name__ == "__main__":
     
     args = get_arguments()
-    with open('config/config.json') as f:
-        params = json.load(f)
 
     # Download the weights only if not already present in the weights folder
-    if not os.path.exists(os.path.join(params["model_path"], "best_model.h5")):
+    if not os.path.exists("/weights/best_model.h5"):
         try:
             snapshot_download(
-                repo_id="heartwise/ecgAI_AF_MHI", local_dir=params["model_path"]
+                repo_id="heartwise/ecgAI_AF_MHI", local_dir="/weights/"
             )
         except Exception as e:
             print(e)
             exit(1)  # Abort the script with a non-zero exit code to indicate an error
 
-    with open(f"{params['model_path']}/config.json") as f:
+    with open(f"/weights/config.json") as f:
         config = json.load(f)
 
     # Importing the model
     model = load_model(
-        f"{params['model_path']}/best_model.h5",
+        f"/weights/best_model.h5",
         custom_objects={"Addons>F1Score": tfa.metrics.F1Score},
     )
 
-    params["model_config"] = config
-
+    config = config
     results = None
     
     if args.csv_data:
-        waveform_files_df = pd.read_csv(params['csv_file'],header=None)
+        ecg_files = os.getenv("ECGFILES")
+        waveform_files_df = pd.read_csv(ecg_files,header=None)
         waveform_files = [p for p in waveform_files_df[0]]
     else:
-        if args.numpy:
-            waveform_files = glob(f"{params['data_dir']}/**/*.npy", recursive=True)
-        else:
-            waveform_files = glob(f"{params['data_dir']}/**/*.xml", recursive=True)
+        data_dir = os.getenv("DATADIR")
+        waveform_files = glob(f"{data_dir}/**/*.{'npy' if args.numpy else 'xml'}", recursive=True)
     
-    if params["dataset"]=="MIMIC":
+    dataset = os.getenv("DATASET")
+    batch_size = int(os.getenv("BATCH_SIZE"))
+    if dataset=="MIMIC":
         # Create the MIMIC dataset
         ecg_dataset = ECGDatasetMIMIC(
             waveform_files,
-            params["model_config"]["MIMIC"]["mean"],
-            params["model_config"]["MIMIC"]["std"],
-            batch_size=params["batch_size"],
+            config["MIMIC"]["mean"],
+            config["MIMIC"]["std"],
+            batch_size=batch_size,
         )
         result_filename = "results_mimic.csv"
 
-    elif params["dataset"]=="MHI":
+    elif dataset=="MHI":
         # Create the MHI dataset
         ecg_dataset = ECGDatasetMHI(
             waveform_files,
-            params["model_config"]["MHI"]["mean"],
-            params["model_config"]["MHI"]["std"],
-            batch_size=params["batch_size"],
+            config["MHI"]["mean"],
+            config["MHI"]["std"],
+            batch_size=batch_size,
         )
         result_filename = "results_mhi.csv"
     else:
@@ -110,7 +109,7 @@ if __name__ == "__main__":
     paths = []
     for batch_data, batch_paths in tqdm(
         tf_dataset,
-        total=len(waveform_files) // params["batch_size"] + 1,
+        total=len(waveform_files) // batch_size + 1,
         desc="Processing batches",
     ):
         batch_predictions = model(batch_data)
@@ -126,6 +125,6 @@ if __name__ == "__main__":
     results_df = pd.DataFrame({"waveform_path": paths, "pred": predictions})
 
     # Save the results DataFrame to a CSV file
-    results_df.to_csv(f"{params['output_dir']}/{result_filename}", index=False)
+    results_df.to_csv(f"/results/results_{dataset}.csv", index=False)
 
-    print(f"Processing complete. Results saved to {params['output_dir']}/{result_filename}")
+    print(f"Processing complete. Results saved to results/results_{dataset}.csv")
