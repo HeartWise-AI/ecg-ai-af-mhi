@@ -25,23 +25,17 @@ def get_arguments():
     parser = argparse.ArgumentParser(description="Get argument", add_help=False)
 
     parser.add_argument(
-        "--config",
-        metavar="config",
-        type=str,
-        help="Enter path to config file",
-    )
-    parser.add_argument(
-        "--MIMIC",
-        action="store_true",
-        help="Run on MIMIC dataset",
-    )
-    parser.add_argument(
-        "--MHI",
-        action="store_true",
-        help="Run on MHI dataset",
-    )
-    parser.add_argument(
         "--csv_data",
+        action="store_true",
+        help="Pass the ECGs through a txt file of paths"
+    )
+    parser.add_argument(
+        "--numpy",
+        action="store_true",
+        help="Pass the ECGs through a txt file of paths"
+    )
+    parser.add_argument(
+        "--xml",
         action="store_true",
         help="Pass the ECGs through a txt file of paths"
     )
@@ -49,8 +43,9 @@ def get_arguments():
 
 
 if __name__ == "__main__":
+    
     args = get_arguments()
-    with open(args.config) as f:
+    with open('config/config.json') as f:
         params = json.load(f)
 
     # Download the weights only if not already present in the weights folder
@@ -79,12 +74,13 @@ if __name__ == "__main__":
     if args.csv_data:
         waveform_files_df = pd.read_csv(params['csv_file'],header=None)
         waveform_files = [p for p in waveform_files_df[0]]
+    else:
+        if args.numpy:
+            waveform_files = glob(f"{params['data_dir']}/**/*.npy", recursive=True)
+        else:
+            waveform_files = glob(f"{params['data_dir']}/**/*.xml", recursive=True)
     
-    if args.MIMIC:
-        
-        # Load and preprocess the DataFrame for MIMIC dataset
-        if not args.csv_data:
-            waveform_files = glob(f"{params['data_dir']['NPY']}/**/*.npy", recursive=True)
+    if params["dataset"]=="MIMIC":
         # Create the MIMIC dataset
         ecg_dataset = ECGDatasetMIMIC(
             waveform_files,
@@ -94,10 +90,7 @@ if __name__ == "__main__":
         )
         result_filename = "results_mimic.csv"
 
-    elif args.MHI:
-        # Load and preprocess the DataFrame for MHI dataset
-        if not args.csv_data:
-            waveform_files = glob(f"{params['data_dir']['XML']}/**/*.xml", recursive=True)
+    elif params["dataset"]=="MHI":
         # Create the MHI dataset
         ecg_dataset = ECGDatasetMHI(
             waveform_files,

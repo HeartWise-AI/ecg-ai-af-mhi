@@ -1,1 +1,1 @@
-python predict.py --config params.json --MIMIC --csv_data
+python predict.py --csv_data
