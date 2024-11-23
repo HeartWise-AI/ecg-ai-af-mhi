@@ -40,8 +40,9 @@ Change `<your-access-token>` with your hf access token
 
 ## Inference Using Docker
 
-The recommended way to run this code is to use docker. The model makes predictions from MUSE XML ECG files. 
-You need to first prepare your input files by putting them in the `./xml-data` directory
+The recommended way to run this code is to use docker. The model makes predictions from 12 leads ECG signal for both the MIMIC dataset 
+and the MHI dataset. The latter is stored as MUSE GE XML files and the former as numpy arrays. The files to be used are passed through
+a text file indicated in .env.example
 
 ### Build docker image 
 ```
@@ -53,7 +54,7 @@ docker build -t ecg-ai-af-mhi .
 docker run \
   --gpus all \
   --env-file .env \
-  -v ./xml-data/:/xml-data/ \
+  -v ./data/:/data/ \
   -v ./weights/:/weights/ \
   -v ./results/:/results/ \
   ecg-ai-af-mhi
@@ -77,9 +78,16 @@ Make sure the .env file is sourced to have access to the HF_TOKEN environment va
 source .env
 ```
 
-Run the code using the parameters json file. This file points to the directories used by the code (ie, xml-data, weights, results)
+Other required parameters are store in the .env
 ```
-python predict.py --config params.json --MHI|--MIMIC
+DATASET=<dataset-name [MIMIC | MHI]>
+BATCH_SIZE=128
+ECGFILES=<list-of-files>
+```
+
+Run the code
+```
+python predict.py
 ```
 
 ### Results 
