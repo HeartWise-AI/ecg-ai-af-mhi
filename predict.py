@@ -69,14 +69,10 @@ if __name__ == "__main__":
     config = config
     results = None
     
-    if args.csv_data:
-        ecg_files = os.getenv("ECGFILES")
-        waveform_files_df = pd.read_csv(ecg_files,header=None)
-        waveform_files = [p for p in waveform_files_df[0]]
-    else:
-        data_dir = os.getenv("DATADIR")
-        waveform_files = glob(f"{data_dir}/**/*.{'npy' if args.numpy else 'xml'}", recursive=True)
-    
+    ecg_files = os.getenv("ECG_FILES")
+    waveform_files_df = pd.read_csv(ecg_files,header=None)
+    waveform_files = [p for p in waveform_files_df[0]]
+
     dataset = os.getenv("DATASET")
     batch_size = int(os.getenv("BATCH_SIZE"))
     if dataset=="MIMIC":
@@ -87,7 +83,6 @@ if __name__ == "__main__":
             config["MIMIC"]["std"],
             batch_size=batch_size,
         )
-        result_filename = "results_mimic.csv"
 
     elif dataset=="MHI":
         # Create the MHI dataset
@@ -97,7 +92,6 @@ if __name__ == "__main__":
             config["MHI"]["std"],
             batch_size=batch_size,
         )
-        result_filename = "results_mhi.csv"
     else:
         raise ValueError("Unknown dataset, process on MIMIC or MHI")
 
@@ -126,5 +120,4 @@ if __name__ == "__main__":
 
     # Save the results DataFrame to a CSV file
     results_df.to_csv(f"/results/results_{dataset}.csv", index=False)
-
     print(f"Processing complete. Results saved to results/results_{dataset}.csv")
